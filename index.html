@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page Title</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="css/jquery.mobile.css" />
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.mobile.js"></script>
+		<script src="js/index.js"></script>
+	</head>
+	<body>
+
+	<div data-role="page" id="main">
+		<div data-role="panel" id="right-panel" data-display="overlay" data-position="right">
+			<ul data-role="listview" data-icon="false">
+				<li data-icon="false"><a href="#" class="ui-btn ui-btn-icon-left ui-icon-carat-r" data-rel="close">&nbsp;</a></li>
+				<li data-icon="false"><a href="#options" class="ui-btn ui-btn-icon-left ui-icon-gear">Настройки</a></li>
+				<li data-icon="false"><a href="#" class="ui-btn ui-btn-icon-left ui-icon-info">О программе</a></li>
+			</ul>
+		</div><!-- /panel -->
+		<div data-role="header">
+			<h1>Расчет оплаты за электроэнергию</h1>
+			<a href="#right-panel" class="ui-btn-right" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+		</div><!-- /header -->
+
+		<div role="main" class="ui-content">
+			<form>
+				<ul data-role="listview" data-inset="true">
+					<li data-role="list-divider">Введите показания счетчика</li>
+					<li class="ui-field-contain">
+						<label for="dayValue">Дневные:</label>
+						<input type="number" name="dayValue" id="dayValue" value="0" pattern="[0-9]+" data-clear-btn="true">
+					</li>
+					<li class="ui-field-contain">
+						<label for="nightValue">Ночные:</label>
+						<input type="number" name="nightValue" id="nightValue" value="0" pattern="[0-9]+" data-clear-btn="true">
+					</li>
+					<li class="ui-body ui-body-a">
+						<fieldset class="ui-grid-solo">
+							<div class="ui-block-a">
+								<a href="#" id="btnCalculate" class="ui-btn ui-corner-all ui-btn-a">Рассчитать</a>
+							</div>
+						</fieldset>
+					</li>
+					<li class="ui-field-contain">
+						<label for="forPay">К оплате:</label>
+						<input type="text" name="forPay" id="forPay" value="200 UAH" data-clear-btn="false">
+					</li>
+				</ul>
+		</div><!-- /content -->
+		
+	</div><!-- /page -->
+	<div data-role="page" id="options">
+		<div data-role="header">
+			<h1>Настройки</h1>
+			<a href="#main" class="ui-btn-left" data-icon="carat-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Back</a>
+		</div><!-- /header -->
+		<div role="main" class="ui-content">
+			<form>
+				<ul data-role="listview" data-inset="false">
+					<li data-role="list-divider">Зонные коэффициенты</li>
+					<li class="ui-field-contain">
+						<label for="nightFactor">Ночь:</label>
+						<input type="number" name="nightFactor" id="nightFactor" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+					</li>
+					<li class="ui-field-contain">
+						<label for="dayFactor">День:</label>
+						<input type="number" name="dayFactor" id="dayFactor" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+					</li>
+					<li class="ui-field-contain">
+						<label for="firstBlockLimit">Граница первого блока:</label>
+						<input type="number" name="firstBlockLimit" id="firstBlockLimit" value="0" pattern="[0-9]+" data-clear-btn="true">
+					</li>
+					<li class="ui-field-contain">
+						<label for="secondBlockLimit">Граница второго блока:</label>
+						<input type="number" name="secondBlockLimit" id="secondBlockLimit" value="0" pattern="[0-9]+" data-clear-btn="true">
+					</li>
+					<li class="ui-field-contain">
+						<label for="firstBlockTax">Тариф для I блока:</label>
+						<input type="number" name="firstBlockTax" id="firstBlockTax" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+					</li>
+					<li class="ui-field-contain">
+						<label for="secondBlockTax">Тариф для II блока:</label>
+						<input type="number" name="secondBlockTax" id="secondBlockTax" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+					</li>
+					<li class="ui-field-contain">
+						<label for="thirdBlockTax">Тариф для III блока:</label>
+						<input type="number" name="thirdBlockTax" id="thirdBlockTax" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+					</li>
+					<li data-role="list-divider">Льготы</li>
+					<li class="ui-field-contain">
+						<label for="powerCredit">Льготных кВт*час в месяц:</label>
+						<input type="number" name="powerCredit" id="powerCredit" value="0" pattern="[0-9]+" data-clear-btn="true">
+					</li>
+					<li class="ui-field-contain">
+						<label for="discount">Льгота, %:</label>
+						<input type="number" name="discount" id="discount" value="0" pattern="[0-9]+" data-clear-btn="true">
+					</li>
+					<li class="ui-body ui-body-a">
+						<fieldset class="ui-grid-a">
+							<div class="ui-block-a"><a href="#main" class="ui-btn ui-corner-all ui-btn-a">Сохранить</a></div>
+							<div class="ui-block-b"><a href="#main" class="ui-btn ui-corner-all ui-btn-a">Отмена</a></div>
+						</fieldset>
+					</li>
+				</ul>
+		</div><!-- /content -->
+	</div><!-- /page -->
+	</body>
+</html>
