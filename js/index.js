@@ -3,7 +3,6 @@
 	var inputFields = pageElement.find( 'input[type="number"]' );
 	var calculateButton = pageElement.find( '#btnCalculate' );
 	var resultField = pageElement.find( 'input#forPay' );
-	var form = pageElement.find( 'form#measurements' );
 	
 	return {
 		getInputValues: function()
@@ -11,9 +10,22 @@
 			var result = {};
 			inputFields.each( function( index, dom ) {
 				element = $(dom);
-				result[element.attr('id')] = element.val();
+				result[element.attr('id')] = parseInt(element.val());
 			});
 			return result;
+		},
+		validate: function()
+		{
+			var success = true;
+			inputFields.each( function( index, dom ) {
+				element = $(dom);
+				regexp = new RegExp('^' + element.attr('pattern') + '$', 'i');
+				if ( !regexp.test( element.val() ) && success === true)
+				{
+					success = false;
+				}
+			});
+			return success;
 		},
 		showResult: function( result )
 		{
@@ -29,7 +41,56 @@
 
 function OptionsPageView( pageElement )
 {
-	return {};
+	var inputFields = pageElement.find( 'input[type="number"]' );
+	var saveButton = pageElement.find( '#btnSave' );
+	var cancelButton = pageElement.find( '#btnCancel' );
+	
+	return {
+		getInputValues: function()
+		{
+			var result = {};
+			var parseFunctions = {
+				'int': parseInt,
+				'float': parseFloat
+			}
+			inputFields.each( function( index, dom ) {
+				element = $(dom);
+				result[element.attr('id')] = parseFunctions[element.attr('data-type')](element.val());
+			});
+			return result;
+		},
+		validate: function()
+		{
+			var success = true;
+			inputFields.each( function( index, dom ) {
+				element = $(dom);
+				regexp = new RegExp('^' + element.attr('pattern') + '$', 'i');
+				if ( !regexp.test( element.val() ) && success === true)
+				{
+					success = false;
+				}
+			});
+			return success;
+		},
+		showStoredOptions: function( options )
+		{
+			inputFields.each( function( index, dom ) {
+				element = $(dom);
+				dom.value = options[element.attr('id')];
+				element.attr('value', options[element.attr('id')]);
+			});
+		},
+		onSaveButtonClick: function( handler )
+		{
+			saveButton.unbind( 'click' );
+			saveButton.bind( 'click', this, handler );
+		},
+		onCancelButtonClick: function( handler )
+		{
+			cancelButton.unbind( 'click' );
+			cancelButton.bind( 'click', this, handler );
+		}
+	};
 };
 
 function OptionsStorage()
@@ -108,12 +169,10 @@ function BillCalculator( optionsStorage )
 				if ( options.firstBlockLimit - options.powerCredit > 0 )
 				{
 					nightDiscountedFirstBlock = Math.round( options.powerCredit * nightConsumptionFactor );
-					//nightDiscountedFirstBlock = options.powerCredit * nightConsumptionFactor;
 				}
 				else
 				{
 					nightDiscountedFirstBlock = Math.round( options.firstBlockLimit * nightConsumptionFactor );
-					//nightDiscountedFirstBlock = options.firstBlockLimit * nightConsumptionFactor;
 				}
 			}
 			else
@@ -121,7 +180,6 @@ function BillCalculator( optionsStorage )
 				if ( totalConsumption - options.powerCredit > 0 )
 				{
 					nightDiscountedFirstBlock = Math.round(options.powerCredit * nightConsumptionFactor);
-					//nightDiscountedFirstBlock = options.powerCredit * nightConsumptionFactor;
 				}
 				else
 				{
@@ -159,7 +217,6 @@ function BillCalculator( optionsStorage )
 				if ( options.firstBlockLimit-options.powerCredit > 0 )
 				{
 					nightNotDiscountedFirstBlock = Math.round((options.firstBlockLimit-options.powerCredit)*nightConsumptionFactor);
-					//nightNotDiscountedFirstBlock = (options.firstBlockLimit-options.powerCredit)*nightConsumptionFactor;
 				}
 				else
 				{
@@ -171,7 +228,6 @@ function BillCalculator( optionsStorage )
 				if ( totalConsumption-options.powerCredit > 0 )
 				{
 					nightNotDiscountedFirstBlock = Math.round((totalConsumption-options.powerCredit)*nightConsumptionFactor);
-					//nightNotDiscountedFirstBlock = (totalConsumption-options.powerCredit)*nightConsumptionFactor;
 				}
 				else
 				{
@@ -217,12 +273,10 @@ function BillCalculator( optionsStorage )
 						if ( options.secondBlockLimit-options.powerCredit > 0 )
 						{
 							nightDiscountedSecondBlock = Math.round( (options.powerCredit-options.firstBlockLimit)*nightConsumptionFactor );
-							//nightDiscountedSecondBlock = (options.powerCredit-options.firstBlockLimit)*nightConsumptionFactor;
 						}
 						else
 						{
 							nightDiscountedSecondBlock = Math.round( (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor );
-							//nightDiscountedSecondBlock = (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor;
 						}
 					}
 				}
@@ -231,12 +285,10 @@ function BillCalculator( optionsStorage )
 					if ( totalConsumption-options.secondBlockLimit > 0 )
 					{
 						nightDiscountedSecondBlock = Math.round( (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor );
-						//nightDiscountedSecondBlock = (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor;
 					}
 					else
 					{
 						nightDiscountedSecondBlock = Math.round( (totalConsumption-options.firstBlockLimit)*nightConsumptionFactor );
-						//nightDiscountedSecondBlock = (totalConsumption-options.firstBlockLimit)*nightConsumptionFactor;
 					}
 				}
 			}
@@ -295,12 +347,10 @@ function BillCalculator( optionsStorage )
 					if ( options.powerCredit-options.firstBlockLimit > 0 )
 					{
 						nightNotDiscountedSecondBlock = Math.round( (options.secondBlockLimit-options.powerCredit)*nightConsumptionFactor );
-						//nightNotDiscountedSecondBlock = (options.secondBlockLimit-options.powerCredit)*nightConsumptionFactor;
 					}
 					else
 					{
 						nightNotDiscountedSecondBlock = Math.round( (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor );
-						//nightNotDiscountedSecondBlock = (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor;
 					}
 				}
 			}
@@ -373,13 +423,11 @@ function BillCalculator( optionsStorage )
 					else
 					{
 						nightDiscountedThirdBlock = Math.round( (options.powerCredit-options.secondBlockLimit)*nightConsumptionFactor );
-						//nightDiscountedThirdBlock = (options.powerCredit-options.secondBlockLimit)*nightConsumptionFactor;
 					}
 				}
 				else
 				{
 					nightDiscountedThirdBlock = Math.round( (totalConsumption-options.secondBlockLimit)*nightConsumptionFactor );
-					//nightDiscountedThirdBlock = (totalConsumption-options.secondBlockLimit)*nightConsumptionFactor;
 				}
 			}
 			else
@@ -474,11 +522,12 @@ function AppController()
 	
 	var storage = OptionsStorage();
 	var bill = BillCalculator( storage );
-	
+	var errorMessage = 'Пожалуйста, заполние все поля корректными данными.';
 	return {
 		init: function()
 		{
 			$( document ).on( 'pagecontainershow', function ( e, ui ) {
+			//$( document ).on( 'pagecontainerbeforechange', function ( e, ui ) {
 				if ( !pages )
 				{
 					mainPage = MainPageView( $( 'div#main' ) );
@@ -491,10 +540,33 @@ function AppController()
 					
 					mainPage.onCalculateButtonClick( function( event ) {
 						page = event.data;
-						page.showResult( bill.calculate( page.getInputValues() ) );
+						if ( page.validate() )
+						{
+							page.showResult( bill.calculate( page.getInputValues() ) );
+						}
+						else
+						{
+							alert( errorMessage );
+						}
+					});
+					optionsPage.onSaveButtonClick( function( event ) {
+						page = event.data;
+						if ( page.validate() )
+						{
+							storage.setOptions( page.getInputValues() );
+						}
+						else
+						{
+							alert( errorMessage );
+							return false;
+						}
 					});
 				}
 				activePage = pages[ui.toPage.attr( 'id' )];
+				if ( activePage == optionsPage )
+				{
+					optionsPage.showStoredOptions( storage.getOptions() );
+				}
 			});
 		},
 		test: function( tests )

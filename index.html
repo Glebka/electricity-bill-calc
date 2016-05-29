@@ -17,7 +17,7 @@
 			<ul data-role="listview" data-icon="false">
 				<li data-icon="false"><a href="#" class="ui-btn ui-btn-icon-left ui-icon-carat-r" data-rel="close">&nbsp;</a></li>
 				<li data-icon="false"><a href="#options" class="ui-btn ui-btn-icon-left ui-icon-gear">Настройки</a></li>
-				<li data-icon="false"><a href="#" class="ui-btn ui-btn-icon-left ui-icon-info">О программе</a></li>
+				<!-- <li data-icon="false"><a href="#" class="ui-btn ui-btn-icon-left ui-icon-info">О программе</a></li> -->
 			</ul>
 		</div><!-- /panel -->
 		<div data-role="header">
@@ -46,7 +46,7 @@
 					</li>
 					<li class="ui-field-contain">
 						<label for="forPay">К оплате:</label>
-						<input type="text" name="forPay" id="forPay" value="200 UAH" data-clear-btn="false">
+						<input type="text" name="forPay" id="forPay" value="0 грн." data-clear-btn="false">
 					</li>
 				</ul>
 		</div><!-- /content -->
@@ -63,45 +63,45 @@
 					<li data-role="list-divider">Зонные коэффициенты</li>
 					<li class="ui-field-contain">
 						<label for="nightFactor">Ночь:</label>
-						<input type="number" name="nightFactor" id="nightFactor" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+						<input type="number" name="nightFactor" id="nightFactor" value="0" pattern="[0-9]+\.?[0-9]*" data-type="float" data-clear-btn="true">
 					</li>
 					<li class="ui-field-contain">
 						<label for="dayFactor">День:</label>
-						<input type="number" name="dayFactor" id="dayFactor" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+						<input type="number" name="dayFactor" id="dayFactor" value="0" pattern="[0-9]+\.?[0-9]*" data-type="float" data-clear-btn="true">
 					</li>
 					<li class="ui-field-contain">
 						<label for="firstBlockLimit">Граница первого блока:</label>
-						<input type="number" name="firstBlockLimit" id="firstBlockLimit" value="0" pattern="[0-9]+" data-clear-btn="true">
+						<input type="number" name="firstBlockLimit" id="firstBlockLimit" value="0" pattern="[0-9]+" data-type="int" data-clear-btn="true">
 					</li>
 					<li class="ui-field-contain">
 						<label for="secondBlockLimit">Граница второго блока:</label>
-						<input type="number" name="secondBlockLimit" id="secondBlockLimit" value="0" pattern="[0-9]+" data-clear-btn="true">
+						<input type="number" name="secondBlockLimit" id="secondBlockLimit" value="0" pattern="[0-9]+" data-type="int" data-clear-btn="true">
 					</li>
 					<li class="ui-field-contain">
 						<label for="firstBlockTax">Тариф для I блока:</label>
-						<input type="number" name="firstBlockTax" id="firstBlockTax" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+						<input type="number" name="firstBlockTax" id="firstBlockTax" value="0" pattern="[0-9]+\.?[0-9]*" data-type="float" data-clear-btn="true">
 					</li>
 					<li class="ui-field-contain">
 						<label for="secondBlockTax">Тариф для II блока:</label>
-						<input type="number" name="secondBlockTax" id="secondBlockTax" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+						<input type="number" name="secondBlockTax" id="secondBlockTax" value="0" pattern="[0-9]+\.?[0-9]*" data-type="float" data-clear-btn="true">
 					</li>
 					<li class="ui-field-contain">
 						<label for="thirdBlockTax">Тариф для III блока:</label>
-						<input type="number" name="thirdBlockTax" id="thirdBlockTax" value="0" pattern="[0-9]+\.?[0-9]*" data-clear-btn="true">
+						<input type="number" name="thirdBlockTax" id="thirdBlockTax" value="0" pattern="[0-9]+\.?[0-9]*" data-type="float" data-clear-btn="true">
 					</li>
 					<li data-role="list-divider">Льготы</li>
 					<li class="ui-field-contain">
 						<label for="powerCredit">Льготных кВт*час в месяц:</label>
-						<input type="number" name="powerCredit" id="powerCredit" value="0" pattern="[0-9]+" data-clear-btn="true">
+						<input type="number" name="powerCredit" id="powerCredit" value="0" pattern="[0-9]+" data-type="int" data-clear-btn="true">
 					</li>
 					<li class="ui-field-contain">
 						<label for="discount">Льгота, %:</label>
-						<input type="number" name="discount" id="discount" value="0" pattern="[0-9]+" data-clear-btn="true">
+						<input type="number" name="discount" id="discount" value="0" pattern="[0-9]+" data-type="int" data-clear-btn="true">
 					</li>
 					<li class="ui-body ui-body-a">
 						<fieldset class="ui-grid-a">
-							<div class="ui-block-a"><a href="#main" class="ui-btn ui-corner-all ui-btn-a">Сохранить</a></div>
-							<div class="ui-block-b"><a href="#main" class="ui-btn ui-corner-all ui-btn-a">Отмена</a></div>
+							<div class="ui-block-a"><a href="#main" id="btnSave" class="ui-btn ui-corner-all ui-btn-a">Сохранить</a></div>
+							<div class="ui-block-b"><a href="#main" id="btnCancel" class="ui-btn ui-corner-all ui-btn-a">Отмена</a></div>
 						</fieldset>
 					</li>
 				</ul>
