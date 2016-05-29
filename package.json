@@ -1,0 +1,19 @@
+{
+  "name": "Electricity",
+  "version": "1.0.0",
+  "description": "> Electricity bill calculator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Glebka/electricity-bill-calc.git"
+  },
+  "author": "Hlieb Romanov",
+  "license": "Apache-2.0.0",
+  "keywords": [
+    "ecosystem:phonegap",
+    "ecosystem:cordova"
+  ],
+  "bugs": {
+    "url": "https://github.com/Glebka/electricity-bill-calc/issues"
+  },
+  "homepage": "https://github.com/Glebka/electricity-bill-calc/"
+}
