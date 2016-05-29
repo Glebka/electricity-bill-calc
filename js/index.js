@@ -108,10 +108,12 @@ function BillCalculator( optionsStorage )
 				if ( options.firstBlockLimit - options.powerCredit > 0 )
 				{
 					nightDiscountedFirstBlock = Math.round( options.powerCredit * nightConsumptionFactor );
+					//nightDiscountedFirstBlock = options.powerCredit * nightConsumptionFactor;
 				}
 				else
 				{
 					nightDiscountedFirstBlock = Math.round( options.firstBlockLimit * nightConsumptionFactor );
+					//nightDiscountedFirstBlock = options.firstBlockLimit * nightConsumptionFactor;
 				}
 			}
 			else
@@ -119,6 +121,7 @@ function BillCalculator( optionsStorage )
 				if ( totalConsumption - options.powerCredit > 0 )
 				{
 					nightDiscountedFirstBlock = Math.round(options.powerCredit * nightConsumptionFactor);
+					//nightDiscountedFirstBlock = options.powerCredit * nightConsumptionFactor;
 				}
 				else
 				{
@@ -156,6 +159,7 @@ function BillCalculator( optionsStorage )
 				if ( options.firstBlockLimit-options.powerCredit > 0 )
 				{
 					nightNotDiscountedFirstBlock = Math.round((options.firstBlockLimit-options.powerCredit)*nightConsumptionFactor);
+					//nightNotDiscountedFirstBlock = (options.firstBlockLimit-options.powerCredit)*nightConsumptionFactor;
 				}
 				else
 				{
@@ -167,6 +171,7 @@ function BillCalculator( optionsStorage )
 				if ( totalConsumption-options.powerCredit > 0 )
 				{
 					nightNotDiscountedFirstBlock = Math.round((totalConsumption-options.powerCredit)*nightConsumptionFactor);
+					//nightNotDiscountedFirstBlock = (totalConsumption-options.powerCredit)*nightConsumptionFactor;
 				}
 				else
 				{
@@ -212,10 +217,12 @@ function BillCalculator( optionsStorage )
 						if ( options.secondBlockLimit-options.powerCredit > 0 )
 						{
 							nightDiscountedSecondBlock = Math.round( (options.powerCredit-options.firstBlockLimit)*nightConsumptionFactor );
+							//nightDiscountedSecondBlock = (options.powerCredit-options.firstBlockLimit)*nightConsumptionFactor;
 						}
 						else
 						{
 							nightDiscountedSecondBlock = Math.round( (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor );
+							//nightDiscountedSecondBlock = (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor;
 						}
 					}
 				}
@@ -224,10 +231,12 @@ function BillCalculator( optionsStorage )
 					if ( totalConsumption-options.secondBlockLimit > 0 )
 					{
 						nightDiscountedSecondBlock = Math.round( (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor );
+						//nightDiscountedSecondBlock = (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor;
 					}
 					else
 					{
 						nightDiscountedSecondBlock = Math.round( (totalConsumption-options.firstBlockLimit)*nightConsumptionFactor );
+						//nightDiscountedSecondBlock = (totalConsumption-options.firstBlockLimit)*nightConsumptionFactor;
 					}
 				}
 			}
@@ -286,10 +295,12 @@ function BillCalculator( optionsStorage )
 					if ( options.powerCredit-options.firstBlockLimit > 0 )
 					{
 						nightNotDiscountedSecondBlock = Math.round( (options.secondBlockLimit-options.powerCredit)*nightConsumptionFactor );
+						//nightNotDiscountedSecondBlock = (options.secondBlockLimit-options.powerCredit)*nightConsumptionFactor;
 					}
 					else
 					{
 						nightNotDiscountedSecondBlock = Math.round( (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor );
+						//nightNotDiscountedSecondBlock = (options.secondBlockLimit-options.firstBlockLimit)*nightConsumptionFactor;
 					}
 				}
 			}
@@ -362,11 +373,13 @@ function BillCalculator( optionsStorage )
 					else
 					{
 						nightDiscountedThirdBlock = Math.round( (options.powerCredit-options.secondBlockLimit)*nightConsumptionFactor );
+						//nightDiscountedThirdBlock = (options.powerCredit-options.secondBlockLimit)*nightConsumptionFactor;
 					}
 				}
 				else
 				{
 					nightDiscountedThirdBlock = Math.round( (totalConsumption-options.secondBlockLimit)*nightConsumptionFactor );
+					//nightDiscountedThirdBlock = (totalConsumption-options.secondBlockLimit)*nightConsumptionFactor;
 				}
 			}
 			else
@@ -385,12 +398,12 @@ function BillCalculator( optionsStorage )
 					}
 					else
 					{
-						dayDiscountedThirdBlock = options.powerCredit-options.secondBlockLimit-dayDiscountedThirdBlock;
+						dayDiscountedThirdBlock = options.powerCredit-options.secondBlockLimit-nightDiscountedThirdBlock;
 					}
 				}
 				else
 				{
-					dayDiscountedThirdBlock = totalConsumption-options.secondBlockLimit-dayDiscountedThirdBlock;
+					dayDiscountedThirdBlock = totalConsumption-options.secondBlockLimit-nightDiscountedThirdBlock;
 				}
 			}
 			else
@@ -403,7 +416,7 @@ function BillCalculator( optionsStorage )
 			{
 				if ( totalConsumption-options.powerCredit > 0 )
 				{
-					nightNotDiscountedThirdBlock = input.nightValue-nightNotDiscountedFirstBlock-nightDiscountedFirstBlock-dayDiscountedThirdBlock-nightNotDiscountedSecondBlock-nightDiscountedSecondBlock;
+					nightNotDiscountedThirdBlock = input.nightValue-nightNotDiscountedFirstBlock-nightDiscountedFirstBlock-nightDiscountedThirdBlock-nightNotDiscountedSecondBlock-nightDiscountedSecondBlock;
 				}
 				else
 				{
@@ -432,22 +445,22 @@ function BillCalculator( optionsStorage )
 				dayNotDiscountedThirdBlock = 0;
 			}
 			
-			var totalFirstBlock = round( nightDiscountedFirstBlock*discountedFirstBlockTax/100*options.nightFactor
+			var totalFirstBlock = round(nightDiscountedFirstBlock*discountedFirstBlockTax/100*options.nightFactor
 				+ dayDiscountedFirstBlock*discountedFirstBlockTax/100*options.dayFactor, 2) 
 				+ round(nightNotDiscountedFirstBlock*options.firstBlockTax/100*options.nightFactor 
 				+ dayNotDiscountedFirstBlock*options.firstBlockTax/100*options.dayFactor, 2);
 				
 			var totalSecondBlock = round(nightDiscountedSecondBlock*discountedSecondBlockTax/100*options.nightFactor 
-				+ dayDiscountedSecondBlock*discountedSecondBlockTax/100*options.dayFactor,2) 
+				+ dayDiscountedSecondBlock*discountedSecondBlockTax/100*options.dayFactor, 2) 
 				+ round(nightNotDiscountedSecondBlock*options.secondBlockTax/100*options.nightFactor 
-				+ dayNotDiscountedSecondBlock*options.secondBlockTax/100*options.dayFactor,2);
+				+ dayNotDiscountedSecondBlock*options.secondBlockTax/100*options.dayFactor, 2);
 			
 			var totalThirdBlock = round(nightDiscountedThirdBlock*discountedThirdBlockTax/100*options.nightFactor 
-				+ dayDiscountedThirdBlock*discountedThirdBlockTax/100*options.dayFactor,2) 
+				+ dayDiscountedThirdBlock*discountedThirdBlockTax/100*options.dayFactor, 2) 
 				+ round(nightNotDiscountedThirdBlock*options.thirdBlockTax/100*options.nightFactor 
-				+ dayNotDiscountedThirdBlock*options.thirdBlockTax/100*options.dayFactor,2);
+				+ dayNotDiscountedThirdBlock*options.thirdBlockTax/100*options.dayFactor, 2);
 			
-			return round( totalFirstBlock + totalSecondBlock + totalThirdBlock, 2 );
+			return round(totalFirstBlock + totalSecondBlock + totalThirdBlock, 2);
 		}
 	};
 };
@@ -459,7 +472,8 @@ function AppController()
 	var optionsPage = null;
 	var activePage = null;
 	
-	var bill = BillCalculator( OptionsStorage() );
+	var storage = OptionsStorage();
+	var bill = BillCalculator( storage );
 	
 	return {
 		init: function()
@@ -482,9 +496,397 @@ function AppController()
 				}
 				activePage = pages[ui.toPage.attr( 'id' )];
 			});
+		},
+		test: function( tests )
+		{
+			var testResult = true;
+			
+			for ( i in tests )
+			{
+				storage.setOptions(tests[i].options);
+				var result = bill.calculate(tests[i].input);
+				if ( result != tests[i].answer )
+				{
+					console.info('Test failed. Expected: ' + tests[i].answer + '; Given: ' + result);
+					console.dir(tests[i]);
+					return;
+				}
+			}
+			console.log('All tests - OK!');
 		}
 	};
 };
 
 var controller = AppController();
 controller.init();
+var tests  = [
+{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 90,
+		'discount': 25
+	},
+	'answer': 107.39},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 120,
+		'discount': 25
+	},
+	'answer': 102.6},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 250,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 120,
+		'discount': 25
+	},
+	'answer': 72.67},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 250,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 260,
+		'discount': 25
+	},
+	'answer': 64.13},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 50,
+		'discount': 25
+	},
+	'answer': 111.66},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 150,
+		'discount': 25
+	},
+	'answer': 97.03},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 125,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 150,
+		'discount': 25
+	},
+	'answer': 126.73},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 125,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 111.32},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 225,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 87.75},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 200,
+		'secondBlockLimit': 225,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 64.13},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 200,
+		'secondBlockLimit': 120,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 134.33},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 90,
+		'secondBlockLimit': 120,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 100,
+		'discount': 25
+	},
+	'answer': 142.88},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 90,
+		'secondBlockLimit': 120,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 80,
+		'discount': 25
+	},
+	'answer': 145.81},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 90,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 80,
+		'discount': 25
+	},
+	'answer': 111.61},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 90,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 90.12},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 220,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 64.13},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 150,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 100,
+		'discount': 25
+	},
+	'answer': 127.69},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 90,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 100,
+		'discount': 25
+	},
+	'answer': 161.72},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 90,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 132.47},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 97.2},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 150,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 120,
+		'discount': 25
+	},
+	'answer': 133.43},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 150,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 220,
+		'discount': 25
+	},
+	'answer': 113.24},
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 220,
+		'discount': 25
+	},
+	'answer': 97.2}
+];
+controller.test( tests );

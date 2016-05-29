@@ -1,0 +1,461 @@
+Night/Day discounted/not discounted in first block
+
+	totalConsumption > options.firstBlockLimit
+	options.firstBlockLimit > options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 90,
+		'discount': 25
+	},
+	'answer': 107.39}
+	
+
+	totalConsumption > options.firstBlockLimit
+	options.firstBlockLimit <= options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 120,
+		'discount': 25
+	},
+	'answer': 102.6}
+	
+
+	totalConsumption <= options.firstBlockLimit
+	totalConsumption > options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 250,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 120,
+		'discount': 25
+	},
+	'answer': 72.68}
+	
+	
+	totalConsumption <= options.firstBlockLimit
+	totalConsumption <= options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 250,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 260,
+		'discount': 25
+	},
+	'answer': 64.13}
+
+Discounted Second block
+
+	totalConsumption > options.firstBlockLimit
+	totalConsumption > options.powerCredit
+	options.firstBlockLimit > options.powerCredit
+	
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 50,
+		'discount': 25
+	},
+	'answer': 111.66}
+
+	totalConsumption > options.firstBlockLimit
+	totalConsumption > options.powerCredit
+	options.firstBlockLimit <= options.powerCredit
+	options.secondBlockLimit > options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 600,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 150,
+		'discount': 25
+	},
+	'answer': 97.03}
+
+	totalConsumption > options.firstBlockLimit
+	totalConsumption > options.powerCredit
+	options.firstBlockLimit <= options.powerCredit
+	options.secondBlockLimit <= options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 125,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 150,
+		'discount': 25
+	},
+	'answer': 126.73}
+
+	totalConsumption > options.firstBlockLimit
+	totalConsumption <= options.powerCredit
+	totalConsumption > options.secondBlockLimit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 125,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 111.32}
+
+	totalConsumption > options.firstBlockLimit
+	totalConsumption <= options.powerCredit
+	totalConsumption <= options.secondBlockLimit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 225,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 87.75}
+
+	totalConsumption <= options.firstBlockLimit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 200,
+		'secondBlockLimit': 225,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 64.13}
+
+Not Discounted Second block
+
+	totalConsumption > options.secondBlockLimit
+	options.powerCredit > options.secondBlockLimit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 200,
+		'secondBlockLimit': 120,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 134.33}
+
+	totalConsumption > options.secondBlockLimit
+	options.powerCredit <= options.secondBlockLimit
+	options.powerCredit > options.firstBlockLimit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 90,
+		'secondBlockLimit': 120,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 100,
+		'discount': 25
+	},
+	'answer': 142.88}
+
+	totalConsumption > options.secondBlockLimit
+	options.powerCredit <= options.secondBlockLimit
+	options.powerCredit <= options.firstBlockLimit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 90,
+		'secondBlockLimit': 120,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 80,
+		'discount': 25
+	},
+	'answer': 145.81}
+
+	totalConsumption <= options.secondBlockLimit
+	totalConsumption > options.firstBlockLimit
+	totalConsumption > options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 90,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 80,
+		'discount': 25
+	},
+	'answer': 111.61}
+
+	totalConsumption <= options.secondBlockLimit
+	totalConsumption > options.firstBlockLimit
+	totalConsumption <= options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 90,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 90.12}
+
+	totalConsumption <= options.secondBlockLimit
+	totalConsumption <= options.firstBlockLimit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 220,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 64.13}
+
+Discounted Third block
+
+	totalConsumption > options.secondBlockLimit
+	totalConsumption > options.powerCredit
+	options.secondBlockLimit > options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 100,
+		'secondBlockLimit': 150,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 100,
+		'discount': 25
+	},
+	'answer': 127.69}
+
+	totalConsumption > options.secondBlockLimit
+	totalConsumption > options.powerCredit
+	options.secondBlockLimit <= options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 90,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 100,
+		'discount': 25
+	},
+	'answer': 161.73}
+
+	totalConsumption > options.secondBlockLimit
+	totalConsumption <= options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 90,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 132.48}
+
+	totalConsumption <= options.secondBlockLimit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 300,
+		'discount': 25
+	},
+	'answer': 97.2}
+
+Not Discounted Third block
+
+	totalConsumption > options.secondBlockLimit
+	totalConsumption > options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 150,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 120,
+		'discount': 25
+	},
+	'answer': 133.43}
+	
+	totalConsumption > options.secondBlockLimit
+	totalConsumption <= options.powerCredit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 150,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 220,
+		'discount': 25
+	},
+	'answer': 113.24}
+	
+	totalConsumption <= options.secondBlockLimit
+	{'input': {
+		'dayValue': 100,
+		'nightValue': 100
+	},
+	'options': {
+		'nightFactor': 0.5,
+		'dayFactor': 1.0,
+		'firstBlockLimit': 60,
+		'secondBlockLimit': 300,
+		'firstBlockTax': 57.0,
+		'secondBlockTax': 99.0,
+		'thirdBlockTax': 156.0,
+		'powerCredit': 220,
+		'discount': 25
+	},
+	'answer': 97.2}
+	
