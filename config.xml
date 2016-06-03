@@ -10,7 +10,7 @@
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
-	<plugin name="cordova-plugin-app-preferences" spec="~1" source="npm" />
+	<plugin name="cordova-plugin-app-preferences" spec="0.7.7" source="npm" />
     <icon src="icon.png" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
