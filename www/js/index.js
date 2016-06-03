@@ -121,31 +121,51 @@ function OptionsStorage()
 		'powerCredit': 120,
 		'discount': 25
 	};
+	
+	var storage = null;
+	
+	function optionsFetched( opts )
+	{
+		options = JSON.parse( opts );
+		$(document).trigger( 'optionsChanged', options );
+	}
+	
+	function optionsStored()
+	{
+		alert('Stored!');
+	}
+	
+	function storageFailure( error )
+	{
+		alert( error );
+	}
+	
+	document.addEventListener('deviceready', function() {
+		// cordova interface
+		storage = plugins.appPreferences;
+		if ( stroage )
+		{
+			storage.fetch( optionsFetched, storageFailure, 'options' );
+		}
+		else
+		{
+			alert('Storage is not availabel!');
+		}
+		
+	}, false);
+	
 	return {
 		getOptions: function()
 		{
-			if ( typeof(Storage) !== "undefined" ) 
-			{
-				var storedOptions = localStorage.getItem( 'options' );
-				if ( storedOptions )
-				{
-					options = JSON.parse( storedOptions );
-				}
-			}
-			else
-			{
-				var errorText = "Critical error: local storage is not supported";
-				console.error( errorText );
-				alert( errorText );
-			}
 			return options;
 		},
 		setOptions: function( opt )
 		{
-			if ( typeof(Storage) !== "undefined" ) 
+			if ( storage !== null ) 
 			{
 				var serializedOptions = JSON.stringify( opt );
-				localStorage.setItem( 'options', serializedOptions );
+				$(document).trigger( 'optionsChanged', opt );
+				storage.store( optionsStored, storageFailure, 'options', serializedOptions );
 			}
 			else
 			{
@@ -160,6 +180,11 @@ function OptionsStorage()
 function BillCalculator( optionsStorage )
 {
 	var storage = optionsStorage;
+	var options = null;
+	
+	$(document).on('optionsChanged', function(opts){
+		options = opts;
+	});
 	
 	function round(num, places) 
 	{ 
@@ -169,7 +194,9 @@ function BillCalculator( optionsStorage )
 	return {
 		calculate: function( input )
 		{
-			var options = storage.getOptions();
+			if ( options === null )
+				return NaN;
+			
 			var discount = options.discount / 100;
 			var discountedFirstBlockTax = round( options.firstBlockTax - options.firstBlockTax * discount, 2 );
 			var discountedSecondBlockTax = round( options.secondBlockTax - options.secondBlockTax * discount, 2 );
