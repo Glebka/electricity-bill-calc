@@ -1003,4 +1003,4 @@ var tests  = [
 	},
 	'answer': 97.2}
 ];
-controller.test( tests );
+//controller.test( tests );
