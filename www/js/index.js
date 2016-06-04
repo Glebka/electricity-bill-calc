@@ -132,12 +132,13 @@ function OptionsStorage()
 	
 	function optionsStored()
 	{
-		alert('Stored!');
+		console.log('Options are stored succesfully.');
 	}
 	
 	function storageFailure( error )
 	{
-		alert( error.exception );
+		console.log('Failed to get/store options. See message below.');
+		console.log(error.exception);
 	}
 	
 	if ( storage )
@@ -146,7 +147,7 @@ function OptionsStorage()
 	}
 	else
 	{
-		alert('Storage is not availabel!');
+		console.log('Storage is not available!');
 	}
 	
 	return {
@@ -166,7 +167,6 @@ function OptionsStorage()
 			{
 				var errorText = "Critical error: local storage is not supported";
 				console.error( errorText );
-				alert( errorText );
 			}
 		}
 	};
@@ -175,7 +175,7 @@ function OptionsStorage()
 function BillCalculator( optionsStorage )
 {
 	var storage = optionsStorage;
-	var options = null;
+	var options = storage.getOptions();
 	
 	$(document).on('optionsChanged', function(opts){
 		options = opts;
@@ -189,9 +189,6 @@ function BillCalculator( optionsStorage )
 	return {
 		calculate: function( input )
 		{
-			if ( options === null )
-				return NaN;
-			
 			var discount = options.discount / 100;
 			var discountedFirstBlockTax = round( options.firstBlockTax - options.firstBlockTax * discount, 2 );
 			var discountedSecondBlockTax = round( options.secondBlockTax - options.secondBlockTax * discount, 2 );
@@ -564,7 +561,6 @@ function AppController()
 		init: function()
 		{
 			$( document ).on( 'pagecontainershow', function ( e, ui ) {
-			//$( document ).on( 'pagecontainerbeforechange', function ( e, ui ) {
 				if ( !pages )
 				{
 					mainPage = MainPageView( $( 'div#main' ) );
