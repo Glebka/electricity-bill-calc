@@ -1,6 +1,4 @@
 ﻿/*
-Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -122,12 +120,13 @@ function OptionsStorage()
 		'discount': 25
 	};
 	
-	var storage = NativeStorage;
+	var storage = null;
 	
 	function optionsFetched( opts )
 	{
+		console.log('Options fetched: ' + opts);
 		options = JSON.parse( opts );
-		$(document).trigger( 'optionsChanged', options );
+		$(document).trigger( 'optionsChanged', [options] );
 	}
 	
 	function optionsStored()
@@ -141,31 +140,43 @@ function OptionsStorage()
 		console.log(error.exception);
 	}
 	
-	if ( storage )
-	{
-		storage.getItem( 'options', optionsFetched, storageFailure );
-	}
-	else
-	{
-		console.log('Storage is not available!');
-	}
+	document.addEventListener("deviceready", function() {
+		console.log('Deviceready event triggered');
+		if ( !storage )
+		{
+			console.log('Initializing storage');
+			storage = NativeStorage;
+			if ( storage )
+			{
+				console.log('Trying to get options');
+				storage.getItem( 'options', optionsFetched, storageFailure );
+			}
+			else
+			{
+				console.log('Storage is not available!');
+			}
+			
+		}	
+	}, false);
 	
 	return {
 		getOptions: function()
 		{
+			console.log('Get options called');
 			return options;
 		},
 		setOptions: function( opt )
 		{
 			if ( storage !== null ) 
 			{
+				options = opt;
+				$(document).trigger( 'optionsChanged', [opt] );
 				var serializedOptions = JSON.stringify( opt );
-				$(document).trigger( 'optionsChanged', opt );
 				storage.setItem( 'options', serializedOptions, optionsStored, storageFailure );
 			}
 			else
 			{
-				var errorText = "Critical error: local storage is not supported";
+				var errorText = "Critical error: native storage is not supported";
 				console.error( errorText );
 			}
 		}
@@ -177,8 +188,9 @@ function BillCalculator( optionsStorage )
 	var storage = optionsStorage;
 	var options = storage.getOptions();
 	
-	$(document).on('optionsChanged', function(opts){
-		options = opts;
+	$(document).on('optionsChanged', function( event, opt ) {
+		options = opt;
+		console.log('Options changed: ' + JSON.stringify( options ) );
 	});
 	
 	function round(num, places) 
@@ -560,9 +572,11 @@ function AppController()
 	return {
 		init: function()
 		{
+			console.log('Subscribe to pagecontainershow event');
 			$( document ).on( 'pagecontainershow', function ( e, ui ) {
 				if ( !pages )
 				{
+					console.log('Initializing page views');
 					mainPage = MainPageView( $( 'div#main' ) );
 					optionsPage = OptionsPageView( $( 'div#options' ) );
 					
@@ -571,7 +585,9 @@ function AppController()
 						'options': optionsPage
 					};
 					
+					console.log('Setting handler on calculate button');
 					mainPage.onCalculateButtonClick( function( event ) {
+						console.log('mainPage.onCalculateButtonClick');
 						page = event.data;
 						if ( page.validate() )
 						{
@@ -582,7 +598,10 @@ function AppController()
 							alert( errorMessage );
 						}
 					});
+					
+					console.log('Setting handler on save button in options dialog');
 					optionsPage.onSaveButtonClick( function( event ) {
+						console.log('optionsPage.onSaveButtonClick');
 						page = event.data;
 						if ( page.validate() )
 						{
@@ -598,7 +617,12 @@ function AppController()
 				activePage = pages[ui.toPage.attr( 'id' )];
 				if ( activePage == optionsPage )
 				{
+					console.log('Active page: options');
 					optionsPage.showStoredOptions( storage.getOptions() );
+				}
+				else
+				{
+					console.log('Active page: main');
 				}
 			});
 		}

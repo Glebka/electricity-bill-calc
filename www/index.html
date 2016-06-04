@@ -1,6 +1,4 @@
 ﻿<!--
-Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -16,42 +14,26 @@ limitations under the License.
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Page Title</title>
+		<title>Расчет оплаты за электроэнергию</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/jquery.mobile.css" />
-		<script src="js/jquery.js"></script>
-		<script src="js/jquery.mobile.js"></script>
-		<script src="phonegap.js"></script>
-		<script src="cordova.js"></script>
-		<script src="js/index.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript">
-			var app = null;
-			function init()
-			{
-				document.addEventListener("deviceready", onDeviceReady, false);
-			}
-			
-			function onDeviceReady()
-			{
-				if ( !app )
-				{
-					console.log('Start init app');
-					app = new AppController();
-					app.init();
-					console.log('App init finished');
-				}
-			}
+			var app = new AppController();
+			app.init();
 		</script>
 	</head>
-	<body onload="init()">
+	<body>
 
 	<div data-role="page" id="main">
 		<div data-role="panel" id="right-panel" data-display="overlay" data-position="right">
 			<ul data-role="listview" data-icon="false">
 				<li data-icon="false"><a href="#" class="ui-btn ui-btn-icon-left ui-icon-carat-r" data-rel="close">&nbsp;</a></li>
 				<li data-icon="false"><a href="#options" class="ui-btn ui-btn-icon-left ui-icon-gear">Настройки</a></li>
-				<!-- <li data-icon="false"><a href="#" class="ui-btn ui-btn-icon-left ui-icon-info">О программе</a></li> -->
 			</ul>
 		</div><!-- /panel -->
 		<div data-role="header">
@@ -65,11 +47,11 @@ limitations under the License.
 					<li data-role="list-divider">Введите показания счетчика</li>
 					<li class="ui-field-contain">
 						<label for="dayValue">Дневные:</label>
-						<input type="number" name="dayValue" id="dayValue" value="0" pattern="[0-9]+" data-clear-btn="true">
+						<input type="number" name="dayValue" id="dayValue" value="" pattern="[0-9]+" data-clear-btn="true">
 					</li>
 					<li class="ui-field-contain">
 						<label for="nightValue">Ночные:</label>
-						<input type="number" name="nightValue" id="nightValue" value="0" pattern="[0-9]+" data-clear-btn="true">
+						<input type="number" name="nightValue" id="nightValue" value="" pattern="[0-9]+" data-clear-btn="true">
 					</li>
 					<li class="ui-body ui-body-a">
 						<fieldset class="ui-grid-solo">
