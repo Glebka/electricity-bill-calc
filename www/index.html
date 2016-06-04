@@ -19,12 +19,32 @@ limitations under the License.
 		<title>Page Title</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
 		<link rel="stylesheet" href="css/jquery.mobile.css" />
 		<script src="js/jquery.js"></script>
 		<script src="js/jquery.mobile.js"></script>
+		<script src="phonegap.js"></script>
+		<script src="cordova.js"></script>
+		<script src="js/index.js"></script>
+		<script type="text/javascript">
+			var app = null;
+			function init()
+			{
+				document.addEventListener("deviceready", onDeviceReady, false);
+			}
+			
+			function onDeviceReady()
+			{
+				if ( !app )
+				{
+					console.log('Start init app');
+					app = new AppController();
+					app.init();
+					console.log('App init finished');
+				}
+			}
+		</script>
 	</head>
-	<body>
+	<body onload="init()">
 
 	<div data-role="page" id="main">
 		<div data-role="panel" id="right-panel" data-display="overlay" data-position="right">
@@ -121,7 +141,5 @@ limitations under the License.
 				</ul>
 		</div><!-- /content -->
 	</div><!-- /page -->
-	<script src="cordova.js"></script>
-	<script src="js/index.js"></script>
 	</body>
 </html>

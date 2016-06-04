@@ -122,7 +122,7 @@ function OptionsStorage()
 		'discount': 25
 	};
 	
-	var storage = null;
+	var storage = NativeStorage;
 	
 	function optionsFetched( opts )
 	{
@@ -137,14 +137,12 @@ function OptionsStorage()
 	
 	function storageFailure( error )
 	{
-		alert( error );
+		alert( error.exception );
 	}
 	
-	// cordova interface
-	storage = plugins.appPreferences;
-	if ( stroage )
+	if ( storage )
 	{
-		storage.fetch( optionsFetched, storageFailure, 'options' );
+		storage.getItem( 'options', optionsFetched, storageFailure );
 	}
 	else
 	{
@@ -162,7 +160,7 @@ function OptionsStorage()
 			{
 				var serializedOptions = JSON.stringify( opt );
 				$(document).trigger( 'optionsChanged', opt );
-				storage.store( optionsStored, storageFailure, 'options', serializedOptions );
+				storage.setItem( 'options', serializedOptions, optionsStored, storageFailure );
 			}
 			else
 			{
@@ -610,10 +608,3 @@ function AppController()
 		}
 	};
 };
-
-var controller = AppController();
-
-document.addEventListener('deviceready', function() {
-	controller.init();
-	alert('Device ready!');
-}, false);
